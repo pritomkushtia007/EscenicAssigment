@@ -20,11 +20,11 @@ public static FileOperation mFileOperation;
 public static JSonPerser mJSonPerser;
     
     public static void main(String[] args) {
- 
-    	
     	mJSonPerser = new JSonPerser();
     	mFileOperation  = new FileOperation(mJSonPerser);
-    	mFileOperation.ReadFromFile("inputjson.txt");
+    	mFileOperation.ReadFromFile("inputtext.txt");
+    	mJSonPerser.TextToJSon();
+    	FileOperation.WriteToFile(mJSonPerser.GetFinalOutput());
     }
     
     

@@ -1,0 +1,7 @@
+{
+"book": {
+"name": "EffectiveJava"
+"authors": ["Joshua Bloch", "James gosling"]
+"published date": "October2005"
+ }
+}

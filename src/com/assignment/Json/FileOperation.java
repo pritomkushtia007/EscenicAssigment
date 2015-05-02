@@ -6,47 +6,30 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FileOperation {
 
-    public boolean mTextToJnos;
-    public boolean mJsonToText;
+    private boolean mTextToJnos;
+    private boolean mJsonToText;
     private JSonPerser mJSonPerser;
+    
+    private static ArrayList<String> mFileData; 
     
     public FileOperation(JSonPerser jSonPerser) {
     	mJsonToText = false;
     	mJsonToText = false;
     	mJSonPerser = jSonPerser;
+    	mFileData = new ArrayList<>();
 	}
 	public void ReadFromFile(String fileName) {
-		 try (BufferedReader br = new BufferedReader(new FileReader(fileName)))//"inputtext.txt")))
+		 try (BufferedReader br = new BufferedReader(new FileReader(fileName)))
          {
              String sCurrentLine;
-             
+             int i =0;
              while ((sCurrentLine = br.readLine()) != null) {
-                 if(!mJsonToText && !mTextToJnos && !sCurrentLine.equals("{")){
-                     mTextToJnos = true;
-                     mJsonToText = false;
-                     mJSonPerser.mFinalOutput = mJSonPerser.mFinalOutput + JSonPerser.mFirstAdditionalStringForTextToJSon;
-                     }
-                 if(!mJsonToText && !mTextToJnos && sCurrentLine.equals("{")){
-                     mTextToJnos = false;
-                     mJsonToText = true;
-                     }
-                     
-                 if(mJsonToText){
-                	 mJSonPerser.JsonToText(sCurrentLine);
-                     }
-                
-                 if(mTextToJnos){
-                	 mJSonPerser.TextToJSon(sCurrentLine);
-                 }
-                 
+            	 mFileData.add(i++,sCurrentLine);
              }
-             if(mTextToJnos)
-            	 mJSonPerser.mFinalOutput = mJSonPerser.mFinalOutput + JSonPerser.mLastAdditionalStringForTextToJSon;
-             System.out.println(mJSonPerser.mFinalOutput);
-             WriteToFile(mJSonPerser.mFinalOutput);
          } catch (IOException e) {
              e.printStackTrace();
          } 
@@ -69,4 +52,8 @@ public class FileOperation {
 	            e.printStackTrace();
 	        }
 	    }
+	 
+	 public static ArrayList<String> GetFileData() {
+		return mFileData;
+	}
 }
