@@ -10,16 +10,9 @@ import java.util.ArrayList;
 
 public class FileOperation {
 
-    private boolean mTextToJnos;
-    private boolean mJsonToText;
-    private JSonPerser mJSonPerser;
-    
     private static ArrayList<String> mFileData; 
     
     public FileOperation(JSonPerser jSonPerser) {
-    	mJsonToText = false;
-    	mJsonToText = false;
-    	mJSonPerser = jSonPerser;
     	mFileData = new ArrayList<>();
 	}
 	public void ReadFromFile(String fileName) {
@@ -36,11 +29,11 @@ public class FileOperation {
 	} 
 	
 	
-	 public static void WriteToFile(String FinalOutput){
+	 public static void WriteToFile(String FinalOutput, String OutputFileName){
 	    	
 	    	String[] words = FinalOutput.split("\n");
 	    	try {
-	            File file = new File("example.txt");
+	            File file = new File(OutputFileName);
 	            FileWriter fw = new FileWriter(file.getAbsoluteFile());
 	            BufferedWriter writer = new BufferedWriter(fw);
 	            for (String word: words) {
