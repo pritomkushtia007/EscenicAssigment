@@ -11,42 +11,50 @@ import java.util.ArrayList;
 public class FileOperation {
 
     private static ArrayList<String> mFileData; 
+    private static FileOperation mFileOperation;
     
-    public FileOperation(JSonPerser jSonPerser) {
-    	mFileData = new ArrayList<>();
-	}
-	public void ReadFromFile(String fileName) {
-		 try (BufferedReader br = new BufferedReader(new FileReader(fileName)))
+    public FileOperation() {
+        mFileData = new ArrayList<>();
+    }
+    public void ReadFromFile(String fileName) {
+         try (BufferedReader br = new BufferedReader(new FileReader(fileName)))
          {
              String sCurrentLine;
              int i =0;
              while ((sCurrentLine = br.readLine()) != null) {
-            	 mFileData.add(i++,sCurrentLine);
+                 mFileData.add(i++,sCurrentLine);
              }
          } catch (IOException e) {
              e.printStackTrace();
          } 
-	} 
-	
-	
-	 public static void WriteToFile(String FinalOutput, String OutputFileName){
-	    	
-	    	String[] words = FinalOutput.split("\n");
-	    	try {
-	            File file = new File(OutputFileName);
-	            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-	            BufferedWriter writer = new BufferedWriter(fw);
-	            for (String word: words) {
-	                writer.write(word);
-	                writer.newLine();
-	            }
-	            writer.close();
-	        } catch ( IOException e ) {
-	            e.printStackTrace();
-	        }
-	    }
-	 
-	 public static ArrayList<String> GetFileData() {
-		return mFileData;
-	}
+    } 
+    
+    
+     public void WriteToFile(String FinalOutput, String OutputFileName){
+            
+            String[] sWords = FinalOutput.split("\n");
+            try {
+                File file = new File(OutputFileName);
+                FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
+                BufferedWriter writer = new BufferedWriter(fw);
+                for (String word: sWords) {
+                    writer.write(word);
+                    writer.newLine();
+                }
+                writer.close();
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+            
+        }
+     
+     public static ArrayList<String> GetFileData() {
+        return mFileData;
+    }
+     public static FileOperation GetInstance()
+     {
+    	 if(mFileOperation == null)
+    		 return new FileOperation();
+    	 return mFileOperation;
+     }
 }

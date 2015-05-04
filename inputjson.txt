@@ -1,7 +1,8 @@
 {
 "book": {
-"name": "EffectiveJava"
-"authors": ["Joshua Bloch", "James gosling", "Pritom"]
+"name": "Effective Java"
+"ISBN": "u9348984995898493"
+"authors": ["Joshua Bloch", "James gosling", "pritom", "kushtis"]
 "published date": "October2005"
  }
 }
